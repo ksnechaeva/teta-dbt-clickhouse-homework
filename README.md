@@ -1,6 +1,6 @@
 # dbt ClickHouse fraud analytics
 
-Домашнее задание «Введение в dbt»: полный проект на ClickHouse с source, staging,
+полный проект на ClickHouse с source, staging,
 шестью аналитическими витринами, макросами, пакетами, generic/singular/unit tests,
 SQLFluff, pre-commit, Makefile и dbt Docs.
 
