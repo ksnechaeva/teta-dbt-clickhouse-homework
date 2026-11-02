@@ -1,0 +1,65 @@
+version: 2
+
+sources:
+  - name: transactions_db
+    description: "Сырая база транзакций из задания по ClickHouse."
+    schema: transactions_db
+    tables:
+      - name: transactions
+        description: "Сырые транзакции с бинарным признаком мошенничества."
+        columns:
+          - name: transaction_time
+            description: "Время транзакции (DateTime)."
+            data_type: DateTime
+            data_tests: [not_null]
+          - name: merch
+            description: "Мерчант (String)."
+            data_type: String
+            data_tests: [not_null]
+          - name: cat_id
+            description: "Категория транзакции; в исходном наборе 14 значений (String)."
+            data_type: String
+            data_tests: [not_null]
+          - name: amount
+            description: "Сумма транзакции (Float64)."
+            data_type: Float64
+            data_tests: [not_null]
+          - name: name_1
+            description: "Имя клиента (String)."
+            data_type: String
+            data_tests: [not_null]
+          - name: name_2
+            description: "Фамилия клиента (String)."
+            data_type: String
+            data_tests: [not_null]
+          - name: gender
+            description: "Пол клиента: M или F (String)."
+            data_type: String
+            data_tests:
+              - not_null
+              - accepted_values:
+                  values: ['M', 'F']
+          - name: us_state
+            description: "Двухбуквенный код штата США (String)."
+            data_type: String
+            data_tests: [not_null]
+          - name: lat
+            description: "Широта клиента (Float64)."
+            data_type: Float64
+          - name: lon
+            description: "Долгота клиента (Float64)."
+            data_type: Float64
+          - name: merchant_lat
+            description: "Широта мерчанта (Float64)."
+            data_type: Float64
+          - name: merchant_lon
+            description: "Долгота мерчанта (Float64)."
+            data_type: Float64
+          - name: target
+            description: "Признак фрода: 0/1 (UInt8)."
+            data_type: UInt8
+            data_tests:
+              - not_null
+              - accepted_values:
+                  values: [0, 1]
+                  quote: false
