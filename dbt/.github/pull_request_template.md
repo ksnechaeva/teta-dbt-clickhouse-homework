@@ -35,7 +35,7 @@ dbt docs generate: PASS
 
 ### DAG / dbt Docs
 
-![dbt lineage DAG](../docs/dbt_dag.png)
+![dbt lineage DAG](https://github.com/ksnechaeva/teta-dbt-clickhouse-homework/blob/feature/dbt-clickhouse-fraud/dbt/docs/dbt_dag.png?raw=true)
 
 Документация воспроизводится командой `make docs`; PNG DAG хранится в `docs/dbt_dag.png`.
 
