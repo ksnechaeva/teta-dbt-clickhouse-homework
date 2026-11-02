@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: stg_transactions
+    description: "Очищенные и типизированные транзакции; одна строка соответствует одной исходной транзакции."
+    columns:
+      - name: customer_id
+        description: "Стабильный surrogate key из имени, фамилии, пола и штата; в source отдельного ID нет."
+        data_tests: [not_null]
+      - name: transaction_time
+        description: "Время транзакции, DateTime."
+        data_tests: [not_null]
+      - name: transaction_date
+        description: "Календарная дата транзакции."
+        data_tests: [not_null]
+      - name: transaction_hour
+        description: "Час суток, 0-23."
+        data_tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 23
+      - name: day_of_week_number
+        description: "Номер дня недели ClickHouse: 1 (понедельник) - 7 (воскресенье)."
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              max_value: 7
+      - name: merch
+        description: "Нормализованное имя мерчанта."
+        data_tests: [not_null]
+      - name: cat_id
+        description: "Категория транзакции."
+        data_tests: [not_null]
+      - name: amount
+        description: "Сумма, Float64."
+        data_tests: [not_null]
+      - name: amount_bucket
+        description: "Сегмент суммы, рассчитанный собственным макросом amount_bucket."
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['SMALL', 'MEDIUM', 'LARGE', 'VERY_LARGE']
+      - name: gender
+        description: "Пол клиента."
+        data_tests:
+          - accepted_values:
+              values: ['M', 'F']
+      - name: us_state
+        description: "Код штата США."
+        data_tests: [not_null]
+      - name: target
+        description: "Исходный признак фрода UInt8."
+        data_tests:
+          - accepted_values:
+              values: [0, 1]
+              quote: false
+      - name: is_fraud
+        description: "Булево представление признака фрода."
+        data_tests: [not_null]
