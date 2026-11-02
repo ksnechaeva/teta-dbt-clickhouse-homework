@@ -4,7 +4,8 @@
 шестью аналитическими витринами, макросами, пакетами, generic/singular/unit tests,
 SQLFluff, pre-commit, Makefile и dbt Docs.
 
-Проект находится в каталоге [`dbt/`](dbt/README.md).
+Полный проект добавляется Pull Request из ветки `feature/dbt-clickhouse-fraud`
+в каталог `dbt/`.
 
 Проверено на ClickHouse 24.8.14.39 и полном размеченном `train.csv` из 786 431 строки:
 
@@ -13,4 +14,4 @@ SQLFluff, pre-commit, Makefile и dbt Docs.
 - `sqlfluff lint`: PASS;
 - `pre-commit run --all-files`: PASS.
 
-Скриншот lineage graph: [`dbt/docs/dbt_dag.png`](dbt/docs/dbt_dag.png).
+В PR приложены лог проверок и скриншот lineage graph.
